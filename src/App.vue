@@ -13,6 +13,19 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: "App",
+
+  components: {},
+
+  data: () => ({
+    //
+  })
+};
+</script>
+@import "~buefy/src/scss/buefy";
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -22,7 +35,7 @@
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   padding-left: 1rem;
 }
 
