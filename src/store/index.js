@@ -7,9 +7,20 @@ import getters from "./getters";
 Vue.use(Vuex);
 
 const state = {
+  searchQuery: "",
   Query: "",
+  initialQuery: "Jack Johnson",
   albums: [],
-  tvShows: []
+  tvShows: [],
+  movies: [],
+  musicVideos: [],
+  audioBooks: [],
+  shortFilms: [],
+  searchFailed: false,
+  isLoading: false,
+  language: "en_us",
+  pageType: "search",
+  appError: null
 };
 
 export default new Vuex.Store({
