@@ -10,13 +10,11 @@
       :searchFailed="searchFailed"
     >
     </Search>
-    <!-- <CardList></CardList> -->
   </div>
 </template>
 
 <script>
 import Search from "@/components/SearchComponent.vue";
-//import CardList from "@/components/CardComponent.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -27,7 +25,6 @@ export default {
 
   components: {
     Search
-    // , CardList
   },
 
   methods: {
@@ -44,10 +41,10 @@ export default {
         this.search_items(this.initialSearchQuery);
       }
     },
-    search_items(new_query) {
+    search_items(new_query, selected, type) {
       if (new_query) {
         const payload = {
-          url: `https://itunes.apple.com/search?term=${new_query}&entity=album&media=music`,
+          url: `https://itunes.apple.com/search?term=${new_query}&entity=${type}&media=${selected}`,
           query: new_query
         };
         this.$store.dispatch("search_albums", payload);
@@ -57,26 +54,14 @@ export default {
     clearSearch() {
       this.$store.commit("clear_search");
     },
-    showBookmarks() {
-      this.$store.commit("set_page_type", "bookmarks");
-    },
     replaceArtworkUrlSize(albumArtwork, newSize) {
-      return albumArtwork.replace("100x100", newSize);
-    },
-    isInBookmark(albumName) {
-      return (
-        this.bookmarkAlbums.findIndex(
-          album => album.collectionCensoredName === albumName
-        ) > -1
-      );
+      return albumArtwork.replace("500x500", newSize);
     }
   },
   created() {
     window.addEventListener("scroll", this.toggleNavbar);
   },
-  destroyed() {
-    window.removeEventListener("scroll", this.toggleNavbar);
-  },
+
   computed: {
     ...mapGetters({
       albums: "get_albums",

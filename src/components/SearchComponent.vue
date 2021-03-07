@@ -1,7 +1,6 @@
 <template>
   <div>
     <section class="section searchbar">
-      <!-- <div class="add-form-content"> -->
       <form>
         <div class="form-row">
           <div class="col-5">
@@ -14,7 +13,7 @@
           </div>
           <div class="col-5">
             <select
-              v-model="selectedType"
+              v-model="selected"
               class="form-control browser-default custom-select"
             >
               <option v-for="(type, index) in typelist" :key="index">
@@ -40,7 +39,6 @@
           </div>
         </div>
       </form>
-      <!-- </div> -->
     </section>
     <section class="section">
       <div class="container" style="margin-top:0px;">
@@ -55,7 +53,6 @@
               v-for="album in displayedAlbums"
               :key="album.collectionId"
             >
-              <!-- Media Panel-->
               <article class="media media-wrap">
                 <figure class="media-left">
                   <p class="image ">
@@ -115,18 +112,20 @@ export default {
   name: "Search",
   data() {
     return {
-      selectedType: "Music",
+      selected: "music",
       typelist: [
-        { name: "Movie" },
-        { name: "Podcast" },
-        { name: "Music" },
-        { name: "MusicVideo" },
-        { name: "Audiobook" },
-        { name: "ShortFilm" },
-        { name: "TvShow" }
+        // { name: "all", type: "allTrack" },
+        { name: "audiobook", type: "audiobook" },
+        { name: "movie", type: "movie" },
+        { name: "music", type: "album" },
+        { name: "musicVideo", type: "musicVideo" },
+        { name: "podcast", type: "podcast" },
+        { name: "shortFilm", type: "shortFilm" },
+        { name: "tvShow", type: "tvSeason" }
       ],
-      searchQuery: "BTS",
+      searchQuery: "Jack Johnson",
       current: true,
+      type: "",
       size: ""
     };
   },
@@ -159,6 +158,7 @@ export default {
       }
     }
   },
+  created: function() {},
   computed: {
     displayedAlbums() {
       return this.albums;
@@ -166,11 +166,17 @@ export default {
   },
   methods: {
     searchItem() {
-      this.$emit("clickSearch", this.searchQuery);
+      this.typelist.forEach(element => {
+        if (element.name === this.selected) {
+          this.type = element.type;
+        }
+      });
+      this.$emit("clickSearch", this.searchQuery, this.selected, this.type);
     },
 
     clear() {
       this.searchQuery = "";
+      this.type = "";
       this.$emit("clickClearSearch");
     }
   }
@@ -184,16 +190,7 @@ export default {
   box-shadow: 0 0 80px 0 rgba(0, 0, 0, 0.5);
   background: white;
 }
-.add-form-content {
-  height: 30pt;
-  width: 100%;
-  padding: 20px;
-  border-radius: 5px;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+
 .btn1 {
   background-color: rgb(154, 220, 231);
   color: white;
