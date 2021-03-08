@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div id="home">
     <div class="nav-search">
       <Search
         @clickSearch="search_items"
@@ -84,7 +84,6 @@ export default {
 </script>
 <style scoped>
 .nav-search {
-  z-index: 39;
   width: 100%;
 }
 </style>

@@ -24,7 +24,7 @@
             </figure>
             <div class="card-content">
               <div class="media">
-                <div class="media-content overflow-content">
+                <div class="media-content">
                   <div class="title is-size-5-widescreen is-size-5-desktop ">
                     <a
                       v-if="itemCard.collectionId"
@@ -70,7 +70,7 @@
         <div class="column">
           <h3 class="title is-4 has-text-centered">Nothing found!</h3>
           <h3 class="title is-4 has-text-centered">
-            Please Search Again!
+            Please Try Again!
           </h3>
         </div>
       </div>
