@@ -1,13 +1,14 @@
 <template>
   <div id="app">
     <div class="nav-search">
-      <nav class="navbar gradient" style="padding: 8px;">
+      <nav class="navbar gradient" style="padding: 10px; ">
         <h1>
           <router-link style="color: white" to="/">{{
             "iTunes Search App"
           }}</router-link>
         </h1>
       </nav>
+
       <router-view />
     </div>
   </div>
@@ -20,10 +21,26 @@
   -moz-osx-font-smoothing: grayscale;
   margin: 10px;
 }
+#nav {
+  padding: 30px;
+}
 
+a {
+  font-weight: lighter;
+  color: #dddcdc;
+  font-size: 20px;
+}
+
+a.router-link-exact-active {
+  color: #ffffff;
+}
+
+a.router-link-active {
+  color: #ffffff;
+}
 h1 {
-  font-size: 2rem;
-  padding-left: 1rem;
+  font-size: 5 rem;
+  padding-left: 1 rem;
 }
 
 .gradient {
@@ -32,7 +49,8 @@ h1 {
 }
 
 .nav-search {
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
+  height: 50%;
 }
 </style>
