@@ -2,11 +2,7 @@ import axios from "axios";
 
 (" use strict");
 
-const update_query = ({ commit }, newQuery) => {
-  commit("mutateQuery", newQuery);
-};
-
-const search_albums = async ({ commit }, payload) => {
+const search_collection = async ({ commit }, payload) => {
   try {
     commit("is_loading", true);
     // axios.get(`https://itunes.apple.com/search?term=${this.search}&entity=${this.entity}&limit=200&offset=${this.page * 200}`
@@ -18,7 +14,7 @@ const search_albums = async ({ commit }, payload) => {
     } else {
       commit("is_loading", false);
       commit("search_failed", false);
-      commit("set_album", data.results);
+      commit("set_collection", data.results);
       commit("set_search_query", payload.query);
     }
   } catch (err) {
@@ -29,6 +25,5 @@ const search_albums = async ({ commit }, payload) => {
 };
 
 export default {
-  update_query,
-  search_albums
+  search_collection
 };

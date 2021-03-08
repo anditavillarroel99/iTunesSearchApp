@@ -1,16 +1,13 @@
 " use strict";
 import { Snackbar } from "buefy/dist/components/snackbar";
 
-const mutate_query = (state, newQuery) => {
-  state.Query.push(newQuery);
-};
 const set_search_query = (state, query) => {
   state.pageType = "search";
   state.searchQuery = query;
 };
 
 const clear_search = state => {
-  state.albums = [];
+  state.collection = [];
   state.Query = "";
 };
 
@@ -22,8 +19,8 @@ const is_loading = (state, action) => {
   state.isLoading = action;
 };
 
-const set_album = (state, data) => {
-  state.albums = data;
+const set_collection = (state, data) => {
+  state.collection = data;
 };
 
 const set_page_type = (state, type) => {
@@ -48,11 +45,10 @@ const application_error = (state, message) => {
 };
 
 export default {
-  mutate_query,
   clear_search,
   search_failed,
   is_loading,
-  set_album,
+  set_collection,
   set_page_type,
   set_search_query,
   application_error

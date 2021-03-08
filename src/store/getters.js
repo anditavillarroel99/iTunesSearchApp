@@ -1,11 +1,7 @@
 " use strict";
 
-const get_albums = state => {
-  return state.albums;
-};
-
-const get_tv_shows = state => {
-  return state.TvShows;
+const get_collection = state => {
+  return state.collection;
 };
 
 const search_query = state => {
@@ -19,24 +15,20 @@ const initial_query = state => {
 const is_loading = state => {
   return state.isLoading;
 };
+
 const page_type = state => {
   return state.pageType;
 };
+
 const search_failed = state => {
   return state.searchFailed;
 };
 
-const get_album_tracks = state => {
-  return state.albumTracks;
-};
-
 export default {
-  get_albums,
-  get_tv_shows,
+  get_collection,
   search_query,
   initial_query,
   is_loading,
   page_type,
-  search_failed,
-  get_album_tracks
+  search_failed
 };

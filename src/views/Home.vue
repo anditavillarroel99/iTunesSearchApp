@@ -1,34 +1,46 @@
 <template>
   <div class="home">
-    <Search
-      @clickSearch="search_items"
-      @clickClearSearch="clearSearch"
-      :newQuery="searchQuery"
-      :replaceArtworkUrlSize="replaceArtworkUrlSize"
-      :albums="pageType === 'search' ? albums : bookmarkAlbums"
-      :isLoading="isLoading"
-      :searchFailed="searchFailed"
-    >
-    </Search>
+    <div class="nav-search">
+      <Search
+        @clickSearch="search_items"
+        @clickClearSearch="clearSearch"
+        :newQuery="searchQuery"
+      >
+      </Search>
+    </div>
+
+    <main>
+      <CardList
+        :replaceArtworkUrlSize="replaceArtworkUrlSize"
+        :items="pageType === 'search' ? items : bookmarkAlbums"
+        :isLoading="isLoading"
+        :searchFailed="searchFailed"
+        :pageType="pageType"
+      ></CardList>
+    </main>
   </div>
 </template>
 
 <script>
 import Search from "@/components/SearchComponent.vue";
+import CardList from "@/components/CardsComponent.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Home",
   data() {
-    return {};
+    return {
+      windowWidth: window.innerWidth
+    };
   },
 
   components: {
-    Search
+    Search,
+    CardList
   },
 
   methods: {
-    ...mapActions(["update_query", "search_albums"]),
+    ...mapActions(["update_query", "search_collection"]),
     setPageType(pageType) {
       if (pageType !== this.pageType) {
         this.$store.commit("set_page_type", pageType);
@@ -47,24 +59,20 @@ export default {
           url: `https://itunes.apple.com/search?term=${new_query}&entity=${type}&media=${selected}`,
           query: new_query
         };
-        this.$store.dispatch("search_albums", payload);
+        this.$store.dispatch("search_collection", payload);
       }
       this.$store.commit("set_page_type", "search");
     },
     clearSearch() {
       this.$store.commit("clear_search");
     },
-    replaceArtworkUrlSize(albumArtwork, newSize) {
-      return albumArtwork.replace("500x500", newSize);
+    replaceArtworkUrlSize(itemArtwork, newSize) {
+      return itemArtwork.replace("100x100", newSize);
     }
   },
-  created() {
-    window.addEventListener("scroll", this.toggleNavbar);
-  },
-
   computed: {
     ...mapGetters({
-      albums: "get_albums",
+      items: "get_collection",
       searchQuery: "search_query",
       initialSearchQuery: "initial_query",
       isLoading: "is_loading",
@@ -74,4 +82,9 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+.nav-search {
+  z-index: 39;
+  width: 100%;
+}
+</style>
