@@ -1,5 +1,5 @@
 # Itunes Search App
-###Andrea Natalia Villarroel Camacho
+Andrea Natalia Villarroel Camacho
 
 La Aplicación, fue desarrollada con Vuejs, con el fin de recrear un nuevo buscador de artistas utilizando la API de iTunes.
 
